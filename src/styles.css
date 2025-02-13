@@ -15,18 +15,27 @@
   align-items: center;
   margin-bottom: 20px;
 }
-
-.navbar {
+ 
+ .navbar {
   background-color: #2c3e50;
   color: white;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: fit-content; 
+  margin: 0 auto; 
+  border-radius: 6px;
 }
+
 
 .navbar h1 {
   margin: 0;
   font-size: 1.5rem;
 }
+
 
 .table-container {
   background-color: white;
@@ -42,17 +51,17 @@ table {
 
 th,
 td {
-  padding: 12px;
-  text-align: left;
+  padding: 12px 16px;
+  text-align: center;
   border-bottom: 1px solid #ddd;
-  align-items: center;
+  white-space: nowrap;
 }
 
 th {
-  background-color: #2c3e50;
+  background-color: #4f667d;
   color: white;
-  padding: 12px;
-  white-space: nowrap;
+  font-weight: bold;
+  text-align: center;
 }
 
 th svg {
@@ -60,7 +69,6 @@ th svg {
   color: #f1c40f;
   vertical-align: middle;
   margin-right: 6px;
-  display: inline-block;
 }
 
 tr:hover {
@@ -86,55 +94,33 @@ tr:hover {
   background-color: #3498db;
   color: white;
 }
-.btn-primary svg {
-  font-size: 18px;
-  color: rgba(245, 239, 239, 0.942);
-  vertical-align: middle;
-  margin-right: 6px;
-  display: inline-block;
-}
 
 .btn-success {
   background-color: #2ecc71;
   color: white;
-}
-.btn-success svg {
-  font-size: 14px;
-  color: rgba(245, 239, 239, 0.942);
-  vertical-align: center;
-  margin-right: 6px;
-  display: inline-block;
 }
 
 .btn-danger {
   background-color: #e74c3c;
   color: white;
 }
-.btn-danger svg {
-  font-size: 14px;
-  color: rgba(245, 239, 239, 0.942);
-  vertical-align:center;
-  margin-right: 6px;
-  display: inline-block;
-}
 
 .btn-info {
   background-color: #3498db;
   color: white;
 }
-.btn-info svg {
-  font-size: 14px;
-  color: rgba(245, 239, 239, 0.942);
-  vertical-align: center;
-  margin-right: 6px;
-  display: inline-block;
-}
-
 
 .btn-secondary {
   background-color: #95a5a6;
   color: white;
 }
+
+.btn svg {
+  font-size: 14px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
 
 .modal-backdrop {
   position: fixed;
@@ -155,6 +141,7 @@ tr:hover {
   width: 90%;
   max-width: 500px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .modal-header {
@@ -181,23 +168,28 @@ tr:hover {
   padding: 16px;
 }
 
+
 .form-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .form-container input {
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
+  width: calc(100% - 20px);
+  box-sizing: border-box; 
 }
 
 .form-container input:disabled {
   background-color: #f5f5f5;
   cursor: not-allowed;
 }
+
 
 @media (max-width: 768px) {
   .button-group {
@@ -209,4 +201,12 @@ tr:hover {
     gap: 16px;
     text-align: center;
   }
+
 }
+@media (max-width: 500px) {
+  .modal {
+    width: 95%;
+    max-width: 400px;
+  }
+}
+
