@@ -8,9 +8,6 @@ import "./styles.css";
 
 const App = () => {
   const [employees, setEmployees] = useState(myArray);
-  console.log(myArray, "---");
-
-
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("add");
   const [editingEmployee, setEditingEmployee] = useState(null);
