@@ -8,36 +8,58 @@ import "./styles.css";
 
 const App = () => {
   const [employees, setEmployees] = useState(myArray);
-  console.log(myArray, "---");
-
-
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("add");
   const [editingEmployee, setEditingEmployee] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditingEmployee({ ...editingEmployee, [name]: value });
+    let errors = { ...editingEmployee.errors };
+
+  if (name === "email") {
+    if (!value.endsWith("@gmail.com")) {
+      errors.email = "Invalid email format (must be @gmail.com)";
+    } else {
+      errors.email = "";
+    }
+  }
+    setEditingEmployee({ ...editingEmployee, [name]: value,errors });
   };
 
   const handleAddEmployee = () => {
+    
+      const { firstName, lastName, email } = editingEmployee;
+      if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+        return;
+      }
+      if (!email.endsWith("@gmail.com")) {
+        return;
+      }
     const newEmployee = {
-      id: employees.length + 1,
-      ...editingEmployee
+      id: employees.length + 1, firstName: editingEmployee.firstName,
+      lastName: editingEmployee.lastName,
+      email: editingEmployee.email,
     };
     setEmployees([...employees, newEmployee]);
     setShowModal(false);
-    setEditingEmployee(null);
+    setEditingEmployee({ firstName: "", lastName: "", email: ""});
   };
 
   const handleUpdateEmployee = () => {
+      const { firstName, lastName, email } = editingEmployee;
+      if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+        return;
+      }
+      if (!email.endsWith("@gmail.com")) {
+        return;
+      }
     setEmployees(
       employees.map((emp) =>
-        emp.id === editingEmployee.id ? editingEmployee : emp
+        emp.id === editingEmployee.id ? { ...editingEmployee } : emp
       )
     );
     setShowModal(false);
-    setEditingEmployee(null);
+    setEditingEmployee({ firstName: "", lastName: "", email: "" });
   };
 
   const deleteEmployee = (id) => {
@@ -48,7 +70,7 @@ const App = () => {
 
   const openModal = (type, employee = null) => {
     setModalType(type);
-    setEditingEmployee(employee || { firstName: "", lastName: "", email: "" });
+    setEditingEmployee(employee || { firstName: "", lastName: "", email: "", errors: { firstName: "", lastName: "", email: "" } });
     setShowModal(true);
   };
 
@@ -59,7 +81,7 @@ const App = () => {
         <div className="header">
           <h2>Employee Management App</h2>
           <button className="btn btn-primary" onClick={() => openModal("add")}>
-           <FaPlus /> Add Employee
+            <FaPlus /> Add Employee
           </button>
         </div>
 
@@ -89,6 +111,7 @@ const App = () => {
                 value={editingEmployee?.firstName || ""}
                 onChange={handleInputChange}
                 disabled={modalType === "view"}
+                required
               />
               <input
                 type="text"
@@ -97,6 +120,7 @@ const App = () => {
                 value={editingEmployee?.lastName || ""}
                 onChange={handleInputChange}
                 disabled={modalType === "view"}
+                required
               />
               <input
                 type="email"
@@ -105,7 +129,13 @@ const App = () => {
                 value={editingEmployee?.email || ""}
                 onChange={handleInputChange}
                 disabled={modalType === "view"}
+                required
               />
+              {editingEmployee?.errors?.email && (
+  <span style={{ color: "red", fontSize: "12px" }}>
+    {editingEmployee.errors.email}
+  </span>
+)}
               {modalType !== "view" && (
                 <div className="button-group">
                   <button

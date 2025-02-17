@@ -12,7 +12,7 @@ const EmployeeTable = ({ employees, deleteEmployee, openModal }) => {
             <th><MdDriveFileRenameOutline/>First Name</th>
             <th><MdDriveFileRenameOutline/>Last Name</th>
            <th> <MdOutlineMail />Email</th>
-            <th><AiFillInteraction/>Actions</th>
+            <th className="Action"><AiFillInteraction/>Actions</th>
           </tr>
         </thead>
         <tbody>
